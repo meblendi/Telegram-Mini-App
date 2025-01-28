@@ -9,6 +9,7 @@ interface UserData {
   username?: string;
   language_code: string;
   is_premium?: boolean;
+  profile_picture?: string;  // Added profile picture URL
 }
 
 export default function Home() {
@@ -45,7 +46,19 @@ export default function Home() {
   return (
     <main className="p-4">
       {userData ? (
-        <UserInfo userData={userData} />
+        <>
+          {/* Display profile picture at the top center */}
+          {userData.profile_picture && (
+            <div className="flex justify-center mb-4">
+              <img
+                src={userData.profile_picture}
+                alt={`${userData.first_name}'s profile`}
+                className="rounded-full w-32 h-32 object-cover"
+              />
+            </div>
+          )}
+          <UserInfo userData={userData} />
+        </>
       ) : (
         <div>Loading...</div>
       )}
