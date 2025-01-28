@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
 
@@ -9,7 +9,9 @@ interface UserData {
   username?: string;
   language_code: string;
   is_premium?: boolean;
+  profile_picture?: string; // Added profile picture URL
   photo?: { small_file_id: string; big_file_id: string }; // Add this field if Telegram provides it
+
 }
 
 export default function Home() {
@@ -18,13 +20,13 @@ export default function Home() {
 
   useEffect(() => {
     setHydrated(true); // Mark the component as hydrated
-
+  
     import("@twa-dev/sdk").then(({ default: WebApp }) => {
       if (WebApp.initDataUnsafe.user) {
         const user = WebApp.initDataUnsafe.user as UserData;
-        console.log("User Data:", user); // Log the full user data for debugging
+        console.log("Full User Data:", user); // Log the entire user data
         setUserData(user);
-
+  
         // Fix viewport height styles if necessary
         document.body.style.setProperty(
           "--tg-viewport-height",
@@ -39,6 +41,8 @@ export default function Home() {
       console.error("Failed to initialize Telegram SDK:", error);
     });
   }, []);
+  
+  
 
   if (!hydrated) {
     // Avoid rendering anything until the component is hydrated
@@ -46,11 +50,33 @@ export default function Home() {
   }
 
   return (
-    <main className="p-4">
+    <main className="bg-sky-300 p-4">
       {userData ? (
-        <UserInfo userData={userData} />
+        <>
+          {/* Display profile picture at the top center */}
+          {userData.profile_picture ? (
+            <div className="flex justify-center mb-4">
+            <img
+              src={userData?.photo?.big_file_id ? `https://api.telegram.org/file/bot<7613683117:AAE3HPxnX0XjLzuJSAyDX0FFZlg7bVHakoA>/${userData.photo.big_file_id}` : "/default-profile.png"}
+              alt="User Profile"
+              className="rounded-full w-32 h-32 object-cover"
+            />
+          </div>
+          
+          ) : (
+            <div className="flex justify-center mb-4">
+              <img
+                src="/default-profile.png" // You can replace this with your fallback image
+                alt="Default Profile"
+                className="rounded-full w-32 h-32 object-cover"
+              />
+            </div>
+          )}
+
+          <UserInfo userData={userData} />
+        </>
       ) : (
-        <div>Loading...</div>
+        <div>The App Is Loading...</div>
       )}
     </main>
   );
