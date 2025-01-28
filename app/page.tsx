@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
 
@@ -9,7 +9,7 @@ interface UserData {
   username?: string;
   language_code: string;
   is_premium?: boolean;
-  profile_picture?: string;  // Added profile picture URL
+  profile_picture?: string; // Added profile picture URL
 }
 
 export default function Home() {
@@ -19,23 +19,25 @@ export default function Home() {
   useEffect(() => {
     setHydrated(true); // Mark the component as hydrated
 
-    import("@twa-dev/sdk").then(({ default: WebApp }) => {
-      if (WebApp.initDataUnsafe.user) {
-        setUserData(WebApp.initDataUnsafe.user as UserData);
+    import("@twa-dev/sdk")
+      .then(({ default: WebApp }) => {
+        if (WebApp.initDataUnsafe.user) {
+          setUserData(WebApp.initDataUnsafe.user as UserData);
 
-        // Fix viewport height styles if necessary
-        document.body.style.setProperty(
-          "--tg-viewport-height",
-          `${window.innerHeight}px`
-        );
-        document.body.style.setProperty(
-          "--tg-viewport-stable-height",
-          `${window.innerHeight}px`
-        );
-      }
-    }).catch((error) => {
-      console.error("Failed to initialize Telegram SDK:", error);
-    });
+          // Fix viewport height styles if necessary
+          document.body.style.setProperty(
+            "--tg-viewport-height",
+            `${window.innerHeight}px`
+          );
+          document.body.style.setProperty(
+            "--tg-viewport-stable-height",
+            `${window.innerHeight}px`
+          );
+        }
+      })
+      .catch((error) => {
+        console.error("Failed to initialize Telegram SDK:", error);
+      });
   }, []);
 
   if (!hydrated) {
@@ -44,7 +46,7 @@ export default function Home() {
   }
 
   return (
-    <main className="p-4">
+    <main className="bg-sky-300 p-4">
       {userData ? (
         <>
           {/* Display profile picture at the top center */}
