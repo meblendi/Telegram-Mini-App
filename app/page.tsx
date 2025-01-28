@@ -22,7 +22,9 @@ export default function Home() {
     import("@twa-dev/sdk")
       .then(({ default: WebApp }) => {
         if (WebApp.initDataUnsafe.user) {
-          setUserData(WebApp.initDataUnsafe.user as UserData);
+          const user = WebApp.initDataUnsafe.user as UserData;
+          console.log(user); // Log the user data to inspect the profile_picture
+          setUserData(user);
 
           // Fix viewport height styles if necessary
           document.body.style.setProperty(
@@ -50,7 +52,7 @@ export default function Home() {
       {userData ? (
         <>
           {/* Display profile picture at the top center */}
-          {userData.profile_picture && (
+          {userData.profile_picture ? (
             <div className="flex justify-center mb-4">
               <img
                 src={userData.profile_picture}
@@ -58,7 +60,16 @@ export default function Home() {
                 className="rounded-full w-32 h-32 object-cover"
               />
             </div>
+          ) : (
+            <div className="flex justify-center mb-4">
+              <img
+                src="/default-profile.png" // You can replace this with your fallback image
+                alt="Default Profile"
+                className="rounded-full w-32 h-32 object-cover"
+              />
+            </div>
           )}
+
           <UserInfo userData={userData} />
         </>
       ) : (
