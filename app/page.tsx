@@ -53,7 +53,7 @@ export default function Home() {
   return (
     <main className="bg-sky-100 p-4">
       <button
-        onClick={toggleUserInfo}
+        onClick={() => setIsUserInfoVisible(!isUserInfoVisible)}
         className="bg-blue-500 text-white p-2 rounded mb-4"
       >
         {isUserInfoVisible ? "Hide User Info" : "Show User Info"}
@@ -65,11 +65,11 @@ export default function Home() {
         <div>App Is Loading...</div>
       )}
 
-      {/* Button to navigate to PeriodApp */}
+      {/* Link to Period App under /pages/period-app */}
       <div className="text-center mt-4">
         <Link href="/pages/period-app">
           <button className="bg-green-500 text-white py-2 px-4 rounded mt-4">
-            open Period App
+            Go to Period App
           </button>
         </Link>
       </div>
