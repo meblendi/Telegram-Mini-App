@@ -14,6 +14,7 @@ interface UserData {
 export default function Home() {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [hydrated, setHydrated] = useState(false); // Ensures we wait for client-side hydration
+  const [isUserInfoVisible, setIsUserInfoVisible] = useState(false); // State to toggle user info visibility
 
   useEffect(() => {
     setHydrated(true); // Mark the component as hydrated
@@ -42,10 +43,21 @@ export default function Home() {
     return null;
   }
 
+  const toggleUserInfo = () => {
+    setIsUserInfoVisible(!isUserInfoVisible); // Toggle the visibility of user info
+  };
+
   return (
     <main className="bg-sky-100 p-4">
+      <button
+        onClick={toggleUserInfo}
+        className="bg-blue-500 text-white p-2 rounded mb-4"
+      >
+        {isUserInfoVisible ? "Hide User Info" : "Show User Info"}
+      </button>
+
       {userData ? (
-        <UserInfo userData={userData} />
+        isUserInfoVisible && <UserInfo userData={userData} />
       ) : (
         <div>App Is Loading...</div>
       )}
