@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
 import Link from "next/link"; // Import Link from next/link
@@ -20,23 +20,25 @@ export default function Home() {
   useEffect(() => {
     setHydrated(true); // Mark the component as hydrated
 
-    import("@twa-dev/sdk").then(({ default: WebApp }) => {
-      if (WebApp.initDataUnsafe.user) {
-        setUserData(WebApp.initDataUnsafe.user as UserData);
+    import("@twa-dev/sdk")
+      .then(({ default: WebApp }) => {
+        if (WebApp.initDataUnsafe.user) {
+          setUserData(WebApp.initDataUnsafe.user as UserData);
 
-        // Fix viewport height styles if necessary
-        document.body.style.setProperty(
-          "--tg-viewport-height",
-          `${window.innerHeight}px`
-        );
-        document.body.style.setProperty(
-          "--tg-viewport-stable-height",
-          `${window.innerHeight}px`
-        );
-      }
-    }).catch((error) => {
-      console.error("Failed to initialize Telegram SDK:", error);
-    });
+          // Fix viewport height styles if necessary
+          document.body.style.setProperty(
+            "--tg-viewport-height",
+            `${window.innerHeight}px`
+          );
+          document.body.style.setProperty(
+            "--tg-viewport-stable-height",
+            `${window.innerHeight}px`
+          );
+        }
+      })
+      .catch((error) => {
+        console.error("Failed to initialize Telegram SDK:", error);
+      });
   }, []);
 
   if (!hydrated) {
@@ -65,9 +67,9 @@ export default function Home() {
 
       {/* Button to navigate to PeriodApp */}
       <div className="text-center mt-4">
-        <Link href="app\Pages\period-app.tsx">
+        <Link href="/period-app">
           <button className="bg-green-500 text-white py-2 px-4 rounded mt-4">
-           Period App
+            Period App
           </button>
         </Link>
       </div>
@@ -84,7 +86,7 @@ const UserInfo = ({ userData }: { userData: UserData }) => (
       <li>Last Name: {userData.last_name || "N/A"}</li>
       <li>Username: {userData.username || "N/A"}</li>
       <li>Premium User: {userData.is_premium ? "Yes" : "No"}</li>
-      <li>Language Code: {userData.language_code}</li>      
+      <li>Language Code: {userData.language_code}</li>
     </ul>
   </>
 );
