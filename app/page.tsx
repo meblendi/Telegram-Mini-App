@@ -42,6 +42,11 @@ export default function Home() {
       });
   }, []);
 
+  if (!hydrated) {
+    // Avoid rendering anything until the component is hydrated
+    return null;
+  }
+  
   return (
     <main className="bg-sky-300 p-4">
       {userData ? (
