@@ -67,9 +67,9 @@ export default function Home() {
 
       {/* Button to navigate to PeriodApp */}
       <div className="text-center mt-4">
-        <Link href="/period-app">
+        <Link href="/pages/period-app">
           <button className="bg-green-500 text-white py-2 px-4 rounded mt-4">
-            Period App
+            open Period App
           </button>
         </Link>
       </div>
