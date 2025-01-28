@@ -60,7 +60,7 @@ const UserInfo = ({ userData }: { userData: UserData }) => (
   <>
     <div className="flex justify-center mb-4">
       <img
-        src={userData.photo ? `https://api.telegram.org/file/bot<YOUR_BOT_TOKEN>/${userData.photo.big_file_id}` : "/default-profile.png"}
+        src={userData.photo ? `https://api.telegram.org/file/bot<7613683117:AAE3HPxnX0XjLzuJSAyDX0FFZlg7bVHakoA>/${userData.photo.big_file_id}` : "/default-profile.png"}
         alt={`${userData.first_name}'s profile`}
         className="rounded-full w-32 h-32 object-cover"
       />
