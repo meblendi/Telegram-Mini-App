@@ -2,6 +2,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 interface UserData {
   id: number;
@@ -34,6 +35,15 @@ export default function PeriodApp() {
       <h1 className="text-center text-2xl font-bold mb-4">
         Welcome Dear {userData.first_name}
       </h1>
+
+      {/* Button to go back to Home */}
+      <div className="text-center mt-4">
+        <Link href="/">
+          <button className="bg-red-500 text-white py-2 px-4 rounded">
+            Back to Home
+          </button>
+        </Link>
+      </div>
     </main>
   );
 }
