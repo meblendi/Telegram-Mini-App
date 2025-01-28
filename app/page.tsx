@@ -60,7 +60,7 @@ export default function Home() {
           <UserInfo userData={userData} />
         </>
       ) : (
-        <div>Loading...</div>
+        <div>The App Is Loading...</div>
       )}
     </main>
   );
