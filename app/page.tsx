@@ -57,7 +57,7 @@ export default function Home() {
           {userData.profile_picture ? (
             <div className="flex justify-center mb-4">
             <img
-              src={userData?.photo?.big_file_id ? `https://api.telegram.org/file/bot<7613683117:AAE3HPxnX0XjLzuJSAyDX0FFZlg7bVHakoA>/${userData.photo.big_file_id}` : "/default-profile.png"}
+              src={userData?.photo?.big_file_id ? `https://api.telegram.org/file/bot/${userData.photo.big_file_id}` : "/default-profile.png"}
               alt="User Profile"
               className="rounded-full w-32 h-32 object-cover"
             />
@@ -86,7 +86,7 @@ const UserInfo = ({ userData }: { userData: UserData }) => (
   <>
     <div className="flex justify-center mb-4">
       <img
-        src={userData.photo ? `https://api.telegram.org/file/bot<7613683117:AAE3HPxnX0XjLzuJSAyDX0FFZlg7bVHakoA>/${userData.photo.big_file_id}` : "/default-profile.png"}
+        src={userData.photo ? `https://api.telegram.org/file/bot/${userData.photo.big_file_id}` : "/default-profile.png"}
         alt={`${userData.first_name}'s profile`}
         className="rounded-full w-32 h-32 object-cover"
       />
