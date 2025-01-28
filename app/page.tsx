@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from "react";
+import Link from "next/link"; // Import Link from next/link
 
 interface UserData {
   id: number;
@@ -61,6 +62,15 @@ export default function Home() {
       ) : (
         <div>App Is Loading...</div>
       )}
+
+      {/* Button to navigate to PeriodApp */}
+      <div className="text-center mt-4">
+        <Link href="/period-app">
+          <button className="bg-green-500 text-white py-2 px-4 rounded mt-4">
+            Go to Period App
+          </button>
+        </Link>
+      </div>
     </main>
   );
 }
