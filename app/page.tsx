@@ -67,7 +67,7 @@ export default function Home() {
       <div className="text-center mt-4">
         <Link href="app\Pages\period-app.tsx">
           <button className="bg-green-500 text-white py-2 px-4 rounded mt-4">
-            Go to Period App
+           Period App
           </button>
         </Link>
       </div>
