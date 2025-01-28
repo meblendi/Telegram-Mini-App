@@ -23,7 +23,7 @@ export default function Home() {
       .then(({ default: WebApp }) => {
         if (WebApp.initDataUnsafe.user) {
           const user = WebApp.initDataUnsafe.user as UserData;
-          console.log(user); // Log the user data to inspect the profile_picture
+          console.log("User Data:", user); // Inspect all available properties
           setUserData(user);
 
           // Fix viewport height styles if necessary
@@ -42,11 +42,6 @@ export default function Home() {
       });
   }, []);
 
-  if (!hydrated) {
-    // Avoid rendering anything until the component is hydrated
-    return null;
-  }
-
   return (
     <main className="bg-sky-300 p-4">
       {userData ? (
@@ -55,7 +50,7 @@ export default function Home() {
           {userData.profile_picture ? (
             <div className="flex justify-center mb-4">
               <img
-                src={userData.profile_picture}
+                src={userData.profile_picture || "/default-profile.png"} // Use a default image if no profile picture
                 alt={`${userData.first_name}'s profile`}
                 className="rounded-full w-32 h-32 object-cover"
               />
