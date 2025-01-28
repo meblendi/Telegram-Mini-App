@@ -43,11 +43,11 @@ export default function Home() {
   }
 
   return (
-    <main className="p-4">
+    <main className="bg-sky-100 p-4">
       {userData ? (
         <UserInfo userData={userData} />
       ) : (
-        <div>Loading...</div>
+        <div>App Is Loading...</div>
       )}
     </main>
   );
