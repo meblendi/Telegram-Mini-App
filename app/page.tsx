@@ -39,34 +39,38 @@ export default function Home() {
   return (
     <main className="bg-gradient-to-b from-white to-blue-50 min-h-screen px-4 pb-24 pt-6 font-sans">
       {/* Header */}
-      <div className="bg-white rounded-3xl p-4 shadow-md flex items-center gap-4">
-        <div className="w-16 h-16 rounded-full overflow-hidden">
-          <Image src="/images/01.jpg" width={64} height={64} alt="Avatar" />
-        </div>
-        <div className="flex-1">
-          <div className="text-sm text-gray-500">
-            @{userData?.username || "Username"}
+      <div className="bg-gradient-to-r from-[#DDEFF9] to-[#EEE8F2] rounded-3xl">
+        <div className="bg-white rounded-3xl p-4 shadow-md flex items-center gap-4">
+          <div className="w-16 h-16 rounded-full overflow-hidden">
+            <Image src="/images/01.jpg" width={64} height={64} alt="Avatar" />
           </div>
-          <div className="text-lg font-bold text-gray-800">
-            {userData?.first_name}
+          <div className="flex-1">
+            <div className="text-sm text-gray-500">
+              @{userData?.username || "Username"}
+            </div>
+            <div className="text-lg font-bold text-gray-800">
+              {userData?.first_name}
+            </div>
+          </div>
+          <div className="text-right">
+            <div className="text-sm text-orange-400 font-semibold">
+              🍜 {1500}
+            </div>
+            <div className="text-xs text-blue-500 underline">How to earn?</div>
           </div>
         </div>
-        <div className="text-right">
-          <div className="text-sm text-orange-400 font-semibold">🍜 {1500}</div>
-          <div className="text-xs text-blue-500 underline">How to earn?</div>
-        </div>
-      </div>
 
-      {/* Statistics */}
-      <h2 className="text-xl font-bold mt-6 mb-2">Statistics</h2>
-      <div className="grid grid-cols-2 gap-4">
-        <div className="bg-purple-100 p-4 rounded-xl text-center">
-          <div className="text-3xl font-bold text-purple-700">1.500</div>
-          <div className="text-sm text-purple-900 font-semibold">Level</div>
-        </div>
-        <div className="bg-green-100 p-4 rounded-xl text-center">
-          <div className="text-3xl font-bold text-green-700">1h 23m</div>
-          <div className="text-sm text-green-900 font-semibold">Time</div>
+        {/* Statistics */}
+        <h2 className="text-xl font-bold mt-6 mb-2">Statistics</h2>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="bg-purple-100 p-4 rounded-xl text-center">
+            <div className="text-3xl font-bold text-purple-700">1.500</div>
+            <div className="text-sm text-purple-900 font-semibold">Streak</div>
+          </div>
+          <div className="bg-green-100 p-4 rounded-xl text-center">
+            <div className="text-3xl font-bold text-green-700">1h 23m</div>
+            <div className="text-sm text-green-900 font-semibold">Time</div>
+          </div>
         </div>
       </div>
 
