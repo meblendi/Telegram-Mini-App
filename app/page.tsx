@@ -79,10 +79,10 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Recommended Games */}
+      {/* Recommended Apps */}
       <h2 className="text-xl font-bold mt-8 mb-4">Recommended Apps</h2>
       <div className="flex gap-2 mb-4 overflow-x-auto">
-        {["Survival", "Action", "Collector"].map((cat) => (
+        {["Newest", "Top", "Favourite"].map((cat) => (
           <button
             key={cat}
             className="px-4 py-1 rounded-full border border-gray-300 bg-white text-sm font-semibold shadow-sm"
@@ -96,7 +96,7 @@ export default function Home() {
         <div className="w-14 h-14 rounded-full overflow-hidden">
           <Image
             src="/images/02.jpg"
-            alt="Game Icon"
+            alt="App Icon"
             width={56}
             height={56}
             className="object-cover w-full h-full"
