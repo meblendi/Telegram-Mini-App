@@ -39,7 +39,12 @@ export default function Home() {
   return (
     <main className="bg-gradient-to-b from-white to-blue-50 min-h-screen px-4 pb-24 pt-6 font-sans">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#DDEFF9] to-[#EEE8F2] rounded-3xl p-4">
+      <div
+        className="rounded-3xl p-4"
+        style={{
+          background: "linear-gradient(135deg, #DDEFF9 0%, #EEE8F2 100%)",
+        }}
+      >
         <div className="bg-white rounded-3xl p-4 shadow-md flex items-center gap-4">
           <div className="w-16 h-16 rounded-full overflow-hidden">
             <Image src="/images/01.jpg" width={64} height={64} alt="Avatar" />
