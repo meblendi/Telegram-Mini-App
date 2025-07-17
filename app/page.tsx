@@ -42,7 +42,7 @@ export default function Home() {
       <div
         className="rounded-3xl p-4"
         style={{
-          background: "linear-gradient(135deg, #DDEFF9 0%, #EEE8F2 100%)",
+          background: "linear-gradient(135deg, #EEE8F2 0%, #DDEFF9 100%)",
         }}
       >
         <div className="bg-white rounded-3xl p-4 shadow-md flex items-center gap-4">
