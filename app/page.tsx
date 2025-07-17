@@ -41,7 +41,7 @@ export default function Home() {
       {/* Header */}
       <div className="bg-white rounded-3xl p-4 shadow-md flex items-center gap-4">
         <div className="w-16 h-16 rounded-full overflow-hidden">
-          <Image src="/avatar.jpg" width={64} height={64} alt="Avatar" />
+          <Image src="/images/01.jpg" width={64} height={64} alt="Avatar" />
         </div>
         <div className="flex-1">
           <div className="text-sm text-gray-500">
