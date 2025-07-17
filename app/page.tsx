@@ -21,8 +21,14 @@ export default function Home() {
       .then(({ default: WebApp }) => {
         if (WebApp.initDataUnsafe.user) {
           setUserData(WebApp.initDataUnsafe.user as UserData);
-          document.body.style.setProperty("--tg-viewport-height", `${window.innerHeight}px`);
-          document.body.style.setProperty("--tg-viewport-stable-height", `${window.innerHeight}px`);
+          document.body.style.setProperty(
+            "--tg-viewport-height",
+            `${window.innerHeight}px`
+          );
+          document.body.style.setProperty(
+            "--tg-viewport-stable-height",
+            `${window.innerHeight}px`
+          );
         }
       })
       .catch((error) => {
@@ -38,8 +44,12 @@ export default function Home() {
           <Image src="/avatar.jpg" width={64} height={64} alt="Avatar" />
         </div>
         <div className="flex-1">
-          <div className="text-sm text-gray-500">@{userData?.username || "Username"}</div>
-          <div className="text-lg font-bold text-gray-800">{userData?.first_name}</div>
+          <div className="text-sm text-gray-500">
+            @{userData?.username || "Username"}
+          </div>
+          <div className="text-lg font-bold text-gray-800">
+            {userData?.first_name}
+          </div>
         </div>
         <div className="text-right">
           <div className="text-sm text-orange-400 font-semibold">🍜 {1500}</div>
@@ -74,14 +84,23 @@ export default function Home() {
       </div>
 
       <div className="bg-white rounded-xl p-4 shadow-md flex items-center gap-4">
-        <div className="w-14 h-14 bg-green-300 rounded-full overflow-hidden flex items-center justify-center text-white text-xl font-bold">
-          😎
+        <div className="w-14 h-14 rounded-full overflow-hidden">
+          <Image
+            src="/images/02.jpg"
+            alt="Game Icon"
+            width={56}
+            height={56}
+            className="object-cover w-full h-full"
+          />
         </div>
+
         <div className="flex-1">
-          <div className="text-md font-bold">Rainbow Friends</div>
+          <div className="text-md font-bold">Personal assistant</div>
           <div className="text-xs text-gray-500">🔥🔥🔥 • 87% • 315.6K</div>
         </div>
-        <button className="bg-blue-500 text-white text-sm px-3 py-1 rounded-xl">Play</button>
+        <button className="bg-blue-500 text-white text-sm px-3 py-1 rounded-xl">
+          Let's Go
+        </button>
       </div>
 
       {/* Bottom Navigation */}
