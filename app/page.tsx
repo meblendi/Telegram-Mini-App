@@ -118,7 +118,7 @@ export default function Home() {
       <div className="fixed bottom-0 left-0 right-0 bg-white shadow-md flex justify-around py-3 rounded-t-3xl">
         {[
           { label: "Home", icon: "🏠", href: "/" },
-          { label: "Store", icon: "🛒", href: "/store" },
+          { label: "Upgrade", icon: "🌟", href: "/store" },
           { label: "Settings", icon: "⚙️", href: "/settings" },
         ].map(({ label, icon, href }) => (
           <Link href={href} key={label} className="text-center text-sm">
