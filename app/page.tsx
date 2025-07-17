@@ -71,7 +71,7 @@ export default function Home() {
       </div>
 
       {/* Recommended Games */}
-      <h2 className="text-xl font-bold mt-8 mb-4">Recommended games</h2>
+      <h2 className="text-xl font-bold mt-8 mb-4">Recommended Apps</h2>
       <div className="flex gap-2 mb-4 overflow-x-auto">
         {["Survival", "Action", "Collector"].map((cat) => (
           <button
