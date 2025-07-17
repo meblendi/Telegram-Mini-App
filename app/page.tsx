@@ -107,9 +107,11 @@ export default function Home() {
           <div className="text-md font-bold">Personal assistant</div>
           <div className="text-xs text-gray-500">🔥🔥🔥 • 87% • 315.6K</div>
         </div>
-        <button className="bg-blue-500 text-white text-sm px-3 py-1 rounded-xl">
-          Let&apos;s Go
-        </button>
+        <Link href="/pages/period_app">
+          <button className="bg-blue-500 text-white text-sm px-3 py-1 rounded-xl">
+            Let&apos;s Go
+          </button>
+        </Link>
       </div>
 
       {/* Bottom Navigation */}
