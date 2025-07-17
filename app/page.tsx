@@ -59,7 +59,7 @@ export default function Home() {
           </div>
           <div className="text-right">
             <div className="text-sm text-orange-400 font-semibold">
-              🍜 {1500}
+              💎 {1500}
             </div>
             <div className="text-xs text-blue-500 underline">How to earn?</div>
           </div>
