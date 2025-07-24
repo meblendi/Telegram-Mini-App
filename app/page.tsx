@@ -24,19 +24,10 @@ export default function Home() {
           const user = WebApp.initDataUnsafe.user as UserData;
           setUserData(user);
 
-          // Send user data to backend with proper typing
           createOrUpdateUser({ user })
-            .then((response: any) => console.log("User synced:", response))
+            .then((response) => console.log("User synced:", response))
             .catch((error: Error) => console.error("Sync failed:", error));
-
-          document.body.style.setProperty(
-            "--tg-viewport-height",
-            `${window.innerHeight}px`
-          );
-          document.body.style.setProperty(
-            "--tg-viewport-stable-height",
-            `${window.innerHeight}px`
-          );
+          // ... rest of the code
         }
       })
       .catch((error: Error) => {

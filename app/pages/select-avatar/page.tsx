@@ -6,20 +6,32 @@ import { updateUserAvatar } from "../../fetcher";
 
 const avatarList = Array.from({ length: 9 }, (_, i) => `Av0${i + 1}.jpg`);
 
+declare global {
+  interface Window {
+    Telegram?: {
+      WebApp?: {
+        initDataUnsafe?: {
+          user?: {
+            id: number;
+          };
+        };
+      };
+    };
+  }
+}
+
 export default function SelectAvatarPage() {
   const router = useRouter();
 
   const handleSelect = async (avatar: string) => {
     try {
-      // Declare Telegram on window interface
-      const tg = (window as any).Telegram?.WebApp;
-      const telegram_id = tg?.initDataUnsafe?.user?.id;
+      const telegram_id = window.Telegram?.WebApp?.initDataUnsafe?.user?.id;
 
       if (telegram_id) {
         await updateUserAvatar(telegram_id, avatar);
       }
       router.push("/");
-    } catch (error: any) {
+    } catch (error) {
       console.error("Failed to update avatar:", error);
     }
   };

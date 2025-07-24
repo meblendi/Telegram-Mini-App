@@ -14,10 +14,7 @@ interface CreateUserRequest {
   user: UserData;
 }
 
-interface UpdateAvatarRequest {
-  telegram_id: number;
-  avatar: string;
-}
+// Remove unused UpdateAvatarRequest since we're using inline typing below
 
 export const api = wretch(url + "api/");
 
@@ -26,7 +23,7 @@ export const createOrUpdateUser = (data: CreateUserRequest) => {
     .url("/telusers/")
     .json(data)
     .post()
-    .json();
+    .json<{ status: string; user?: UserData; error?: string }>();
 };
 
 export const updateUserAvatar = (telegram_id: number, avatar: string) => {
@@ -34,10 +31,9 @@ export const updateUserAvatar = (telegram_id: number, avatar: string) => {
     .url("/telusers/avatar/")
     .json({ telegram_id, avatar })
     .post()
-    .json();
+    .json<{ status: string; error?: string }>();
 };
 
-// Optional: Add this if you need a generic fetcher
-export const fetcher = (endpoint: string): Promise<any> => {
-  return api.get(endpoint).json();
+export const fetcher = <T>(endpoint: string): Promise<T> => {
+  return api.get(endpoint).json<T>();
 };
