@@ -9,24 +9,26 @@ const avatarList = Array.from({ length: 9 }, (_, i) => `Av0${i + 1}.jpg`);
 export default function SelectAvatarPage() {
   const router = useRouter();
 
-  
-
   const handleSelect = async (avatar: string) => {
-  try {
-    // Get telegram_id from WebApp (you'll need to store it)
-    const telegram_id = window.Telegram.WebApp.initDataUnsafe?.user?.id;
-    if (telegram_id) {
-      await updateUserAvatar(telegram_id, avatar);
+    try {
+      // Declare Telegram on window interface
+      const tg = (window as any).Telegram?.WebApp;
+      const telegram_id = tg?.initDataUnsafe?.user?.id;
+
+      if (telegram_id) {
+        await updateUserAvatar(telegram_id, avatar);
+      }
+      router.push("/");
+    } catch (error: any) {
+      console.error("Failed to update avatar:", error);
     }
-    router.push("/");
-  } catch (error) {
-    console.error("Failed to update avatar:", error);
-  }
-};
+  };
 
   return (
     <main className="min-h-screen bg-white p-6">
-      <h1 className="text-2xl font-bold mb-6 text-center">Select Your Avatar</h1>
+      <h1 className="text-2xl font-bold mb-6 text-center">
+        Select Your Avatar
+      </h1>
       <div className="grid grid-cols-3 gap-4">
         {avatarList.map((filename) => (
           <button

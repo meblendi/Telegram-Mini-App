@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { createOrUpdateUser } from "./fetcher"; 
+import { createOrUpdateUser } from "./fetcher";
 
 interface UserData {
   id: number;
@@ -24,10 +24,10 @@ export default function Home() {
           const user = WebApp.initDataUnsafe.user as UserData;
           setUserData(user);
 
-          // Send user data to backend
+          // Send user data to backend with proper typing
           createOrUpdateUser({ user })
-            .then((response) => console.log("User synced:", response))
-            .catch((error) => console.error("Sync failed:", error));
+            .then((response: any) => console.log("User synced:", response))
+            .catch((error: Error) => console.error("Sync failed:", error));
 
           document.body.style.setProperty(
             "--tg-viewport-height",
@@ -39,7 +39,7 @@ export default function Home() {
           );
         }
       })
-      .catch((error) => {
+      .catch((error: Error) => {
         console.error("Failed to initialize Telegram SDK:", error);
       });
   }, []);

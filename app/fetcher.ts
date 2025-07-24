@@ -1,12 +1,30 @@
 import wretch from "wretch";
-import { url } from "./server";
+import { url } from "./server"; 
 
-export const api = wretch(url + "api/"); // Note the added "api/"
+interface UserData {
+  id: number;
+  first_name: string;
+  last_name?: string;
+  username?: string;
+  language_code: string;
+  is_premium?: boolean;
+}
 
-export const createOrUpdateUser = (userData: any) => {
+interface CreateUserRequest {
+  user: UserData;
+}
+
+interface UpdateAvatarRequest {
+  telegram_id: number;
+  avatar: string;
+}
+
+export const api = wretch(url + "api/");
+
+export const createOrUpdateUser = (data: CreateUserRequest) => {
   return api
     .url("/telusers/")
-    .json(userData)
+    .json(data)
     .post()
     .json();
 };
@@ -17,4 +35,9 @@ export const updateUserAvatar = (telegram_id: number, avatar: string) => {
     .json({ telegram_id, avatar })
     .post()
     .json();
+};
+
+// Optional: Add this if you need a generic fetcher
+export const fetcher = (endpoint: string): Promise<any> => {
+  return api.get(endpoint).json();
 };
