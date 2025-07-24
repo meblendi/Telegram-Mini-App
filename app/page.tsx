@@ -85,7 +85,7 @@ export default function Home() {
         <h2 className="text-xl font-bold mt-6 mb-2">Statistics</h2>
         <div className="grid grid-cols-2 gap-4">
           <div className="bg-purple-100 p-4 rounded-xl text-center shadow-md">
-            <div className="text-3xl font-bold text-purple-700">1.500</div>
+            <div className="text-3xl font-bold text-purple-700">2.600</div>
             <div className="text-sm text-purple-900 font-semibold">Streak</div>
           </div>
           <div className="bg-green-100 p-4 rounded-xl text-center shadow-md">
