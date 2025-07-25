@@ -82,7 +82,7 @@ export default function Home() {
         </div>
 
         {/* Statistics */}
-        <h2 className="text-xl font-bold mt-6 mb-2">Statistics</h2>
+        <h2 className="text-center text-xl font-bold mt-6 mb-2">Statistics</h2>
         <div className="grid grid-cols-2 gap-4">
           <div className="bg-purple-100 p-4 rounded-xl text-center shadow-md">
             <div className="text-3xl font-bold text-purple-700">2.600</div>
@@ -96,7 +96,7 @@ export default function Home() {
       </div>
 
       {/* Recommended Apps */}
-      <h2 className="text-xl font-bold mt-8 mb-4">Recommended Apps</h2>
+      <h2 className="text-center text-xl font-bold mt-8 mb-4">Recommended Apps</h2>
       <div className="flex gap-2 mb-4 overflow-x-auto">
         {["Newest", "Top", "Favourite"].map((cat) => (
           <button
