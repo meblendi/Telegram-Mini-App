@@ -6,7 +6,7 @@ import Image from "next/image";
 import { createOrUpdateUser, getUser } from "./fetcher";
 
 interface TelegramUserCore {
-  id: number; 
+  id: number;
   first_name: string;
   last_name?: string;
   username?: string;
@@ -37,7 +37,6 @@ export default function Home() {
       } catch (error) {
         console.error("Initialization error:", error);
         // Fallback to default avatar if API fails
-        
       }
     };
 
@@ -110,49 +109,50 @@ export default function Home() {
       </div>
 
       <div className="bg-white rounded-xl p-4 shadow-md grid grid-rows-2 gap-4 items-center ">
-        <div className="w-14 h-14 rounded-full overflow-hidden">
-          <Image
-            src="/images/app01.jpg"
-            alt="App Icon"
-            width={56}
-            height={56}
-            className="object-cover w-full h-full"
-          />
+        <div className="bg-white rounded-xl p-4 shadow-md flex gap-4 items-center">
+          <div className="w-14 h-14 rounded-full overflow-hidden">
+            <Image
+              src="/images/app01.jpg"
+              alt="App Icon"
+              width={56}
+              height={56}
+              className="object-cover w-full h-full"
+            />
+          </div>
+
+          <div className="flex-1">
+            <div className="text-md font-bold">Personal assistant</div>
+            <div className="text-xs text-gray-500">🔥🔥🔥 • 87% • 315.6K</div>
+          </div>
+          <Link href="/pages/personal_assistant">
+            <button className="bg-blue-500 text-white text-sm px-3 py-1 rounded-xl">
+              Let&apos;s Go
+            </button>
+          </Link>
         </div>
 
-        <div className="flex-1">
-          <div className="text-md font-bold">Personal assistant</div>
-          <div className="text-xs text-gray-500">🔥🔥🔥 • 87% • 315.6K</div>
-        </div>
-        <Link href="/pages/personal_assistant">
-          <button className="bg-blue-500 text-white text-sm px-3 py-1 rounded-xl">
-            Let&apos;s Go
-          </button>
-        </Link>
+        <div className="bg-white rounded-xl p-4 shadow-md flex gap-4 items-center">
+          <div className="w-14 h-14 rounded-full overflow-hidden">
+            <Image
+              src="/images/app01.jpg"
+              alt="App Icon"
+              width={56}
+              height={56}
+              className="object-cover w-full h-full"
+            />
+          </div>
 
-        <div className="w-14 h-14 rounded-full overflow-hidden">
-          <Image
-            src="/images/app01.jpg"
-            alt="App Icon"
-            width={56}
-            height={56}
-            className="object-cover w-full h-full"
-          />
+          <div className="flex-1">
+            <div className="text-md font-bold">Personal accountant</div>
+            <div className="text-xs text-gray-500">👌👌👌 • 73% • 56.3K</div>
+          </div>
+          <Link href="/pages/Personal accountant">
+            <button className="bg-blue-500 text-white text-sm px-3 py-1 rounded-xl">
+              Unlock
+            </button>
+          </Link>
         </div>
-
-        <div className="flex-1">
-          <div className="text-md font-bold">Personal accountant</div>
-          <div className="text-xs text-gray-500">👌👌👌 • 73% • 56.3K</div>
-        </div>
-        <Link href="/pages/Personal accountant">
-          <button className="bg-blue-500 text-white text-sm px-3 py-1 rounded-xl">
-            Unlock
-          </button>
-        </Link>
-
-        
       </div>
-      
 
       {/* Bottom Navigation */}
       <div className="fixed bottom-0 left-0 right-0 bg-white shadow-md flex justify-around py-3 rounded-t-3xl">
