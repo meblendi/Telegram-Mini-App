@@ -18,8 +18,7 @@ export default function Settings() {
             <div>{label}</div>
           </Link>
         ))}
-      </div>
-      <BottomNavBar />
+      </div>      
     </main>
   );
 }
