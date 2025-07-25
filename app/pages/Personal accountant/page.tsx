@@ -8,7 +8,7 @@ export default function Settings() {
       {/* Bottom Navigation */}
       <div className="fixed bottom-0 left-0 right-0 bg-white shadow-md flex justify-around py-3 rounded-t-3xl">
         {[
-          { label: "Home", icon: "🏠", href: "../../page.tsx" },
+          { label: "Home", icon: "🏠", href: "../../" },
           { label: "Upgrade", icon: "🌟", href: "../../store" },
           { label: "Settings", icon: "⚙️", href: "../../settings" },
         ].map(({ label, icon, href }) => (
