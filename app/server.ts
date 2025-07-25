@@ -1,1 +1,1 @@
-export const url = "https://newbi-django-render-app.onrender.com/";
+export const url = "https://newbi-django-render-app.onrender.com";

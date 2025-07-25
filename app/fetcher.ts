@@ -16,14 +16,18 @@ interface CreateUserRequest {
 
 // Remove unused UpdateAvatarRequest since we're using inline typing below
 
-export const api = wretch(url + "api");
+export const api = wretch(url).url("/api");
 
 export const createOrUpdateUser = (data: CreateUserRequest) => {
   return api
     .url("telusers/")
     .json(data)
     .post()
-    .json<{ status: string; user?: UserData; error?: string }>();
+    .json<{ status: string; user?: UserData; error?: string }>()
+    .catch(error => {
+      console.error("API Error:", error);
+      throw error;
+    });
 };
 
 export const updateUserAvatar = (telegram_id: number, avatar: string) => {
