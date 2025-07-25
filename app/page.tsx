@@ -109,7 +109,7 @@ export default function Home() {
         ))}
       </div>
 
-      <div className="bg-white rounded-xl p-4 shadow-md flex flex-row items-center gap-4">
+      <div className="bg-white rounded-xl p-4 shadow-md grid grid-rows-2 gap-4 items-center ">
         <div className="w-14 h-14 rounded-full overflow-hidden">
           <Image
             src="/images/app01.jpg"
@@ -142,7 +142,7 @@ export default function Home() {
 
         <div className="flex-1">
           <div className="text-md font-bold">Personal accountant</div>
-          <div className="text-xs text-gray-500">🔥🔥🔥 • 73% • 56.3K</div>
+          <div className="text-xs text-gray-500">👌👌👌 • 73% • 56.3K</div>
         </div>
         <Link href="/pages/Personal accountant">
           <button className="bg-blue-500 text-white text-sm px-3 py-1 rounded-xl">
