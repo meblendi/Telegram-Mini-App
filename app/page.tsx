@@ -109,7 +109,7 @@ export default function Home() {
         ))}
       </div>
 
-      <div className="bg-white rounded-xl p-4 shadow-md flex items-center gap-4">
+      <div className="bg-white rounded-xl p-4 shadow-md flex flex-row items-center gap-4">
         <div className="w-14 h-14 rounded-full overflow-hidden">
           <Image
             src="/images/app01.jpg"
