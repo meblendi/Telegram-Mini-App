@@ -32,7 +32,7 @@ export const createOrUpdateUser = (data: CreateUserRequest) => {
 
 export const updateUserAvatar = (telegram_id: number, avatar: string) => {
   return api
-    .url("telusers/avatar/")
+    .url("/telusers/avatar/")
     .json({ telegram_id, avatar })
     .post()
     .json<{ status: string; error?: string }>();
