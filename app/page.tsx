@@ -61,8 +61,7 @@ export default function Home() {
                 width={64}
                 height={64}
                 alt="Avatar"
-                className="object-cover w-full h-full"
-                onError={() => setCurrentAvatar("/images/Av01.jpg")}
+                className="object-cover w-full h-full"                
               />
             </Link>
           </div>
