@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -12,7 +13,6 @@ export const metadata: Metadata = {
   authors: [{ name: "Meblendi" }],
 };
 
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -21,9 +21,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive"/>
+        <Script
+          src="https://telegram.org/js/telegram-web-app.js"
+          strategy="beforeInteractive"
+        />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
