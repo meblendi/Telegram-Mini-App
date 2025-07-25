@@ -1,4 +1,5 @@
 import Link from "next/link";
+import BottomNavBar from "../components/BottomNavBar";
 
 export default function Settings() {
   return (
@@ -18,6 +19,7 @@ export default function Settings() {
           </Link>
         ))}
       </div>
+      <BottomNavBar />
     </main>
   );
 }
