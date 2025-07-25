@@ -16,7 +16,7 @@ interface CreateUserRequest {
 
 // Remove unused UpdateAvatarRequest since we're using inline typing below
 
-export const api = wretch(url + "api/");
+export const api = wretch(url + "api");
 
 export const createOrUpdateUser = (data: CreateUserRequest) => {
   return api
