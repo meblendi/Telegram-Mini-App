@@ -1,34 +1,44 @@
 import wretch from "wretch";
-import { url } from "./server"; 
+import { url } from "./server";
 
-export interface TelegramUserResponse {
-    telegram_id: number;
-    first_name: string;
-    last_name?: string;
-    username?: string;
-    language_code: string;
-    is_premium?: boolean;
-    avatar: string;
-    points?: number;
-    streak?: number;
-    time_spent?: number;
+// First, define your core user types
+interface TelegramUserCore {
+  id: number; // This matches what Telegram provides
+  first_name: string;
+  last_name?: string;
+  username?: string;
+  language_code: string;
+  is_premium?: boolean;
 }
 
+// Response from your backend API
+interface TelegramUserResponse extends TelegramUserCore {
+  telegram_id: number; // Your backend uses this field name
+  avatar: string;
+  points?: number;
+  streak?: number;
+  time_spent?: number;
+}
+
+// Request payload for creating/updating users
 interface CreateUserRequest {
-  user: TelegramUserResponse;
+  user: TelegramUserCore; // What Telegram provides
 }
-
-// Remove unused UpdateAvatarRequest since we're using inline typing below
 
 export const api = wretch(url).url("/api");
 
 export const createOrUpdateUser = (data: CreateUserRequest) => {
   return api
     .url("/telusers/")
-    .json(data)
+    .json({
+      user: {
+        ...data.user,
+        telegram_id: data.user.id,
+      },
+    })
     .post()
     .json<TelegramUserResponse>()
-    .catch(error => {
+    .catch((error) => {
       console.error("API Error:", error);
       throw error;
     });
@@ -46,7 +56,7 @@ export const getUser = (telegram_id: number) => {
   return api
     .url(`/telusers/${telegram_id}/`)
     .get()
-    .json<TelegramUserResponse>();  // Use the new interface
+    .json<TelegramUserResponse>(); // Use the new interface
 };
 
 export const fetcher = <T>(endpoint: string): Promise<T> => {

@@ -5,40 +5,39 @@ import Link from "next/link";
 import Image from "next/image";
 import { createOrUpdateUser, getUser } from "./fetcher";
 
-interface UserData {
-  id: number;
+interface TelegramUserCore {
+  id: number; 
   first_name: string;
   last_name?: string;
   username?: string;
   language_code: string;
   is_premium?: boolean;
-  avatar?: string;  
 }
 
 export default function Home() {
-  const [userData, setUserData] = useState<UserData | null>(null);
+  const [userData, setUserData] = useState<TelegramUserCore | null>(null);
   const [currentAvatar, setCurrentAvatar] = useState("/images/Av01.jpg");
 
   useEffect(() => {
     const init = async () => {
       try {
         const { default: WebApp } = await import("@twa-dev/sdk");
-        
+
         if (WebApp.initDataUnsafe.user) {
-          const user = WebApp.initDataUnsafe.user as UserData;
+          const user = WebApp.initDataUnsafe.user as TelegramUserCore;
           setUserData(user);
 
-          // First create/update the user
+          // Create/update user - response not used here
           await createOrUpdateUser({ user });
-          
-          // Then fetch the user data including avatar
-          const response = await getUser(user.id);
-          if (response?.avatar) {
-            setCurrentAvatar(`/images/${response.avatar}`);
-          }
+
+          // Get complete user data including avatar
+          const fullUser = await getUser(user.id);
+          setCurrentAvatar(`/images/${fullUser.avatar}`);
         }
       } catch (error) {
         console.error("Initialization error:", error);
+        // Fallback to default avatar if API fails
+        setCurrentAvatar("/images/Av01.jpg");
       }
     };
 
