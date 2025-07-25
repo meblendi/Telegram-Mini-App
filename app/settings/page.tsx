@@ -10,7 +10,7 @@ export default function Settings() {
           </button>
         </Link>
       </div>
-      <div>Settings Page COMING SOON</div>
+      <div className="text-center mt-10">Settings Page COMING SOON</div>
     </main>
   );
 }
