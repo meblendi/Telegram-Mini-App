@@ -7,6 +7,7 @@ export default function Settings() {
       
       <div className="text-center mt-10">Settings Page <br></br>COMING SOON</div>
       {/* Bottom Navigation */}
+      
       <div className="fixed bottom-0 left-0 right-0 bg-white shadow-md flex justify-around py-3 rounded-t-3xl">
         {[
           { label: "Home", icon: "🏠", href: "/" },
