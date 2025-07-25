@@ -3,14 +3,8 @@ import Link from "next/link";
 export default function Store() {
   return (
     <main>
-      <div className="text-center mt-4">
-        <Link href="/">
-          <button className="bg-red-500 text-white py-2 px-4 rounded">
-            Back to Home
-          </button>
-        </Link>
-      </div>
-      <div className="text-center mt-10">Settings Page COMING SOON</div>
+      
+      <div className="text-center mt-10">Store Page COMING SOON</div>
       {/* Bottom Navigation */}
       <div className="fixed bottom-0 left-0 right-0 bg-white shadow-md flex justify-around py-3 rounded-t-3xl">
         {[
