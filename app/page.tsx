@@ -52,32 +52,51 @@ export default function Home() {
           background: "linear-gradient(45deg, #EEE8F2 0%, #DDEFF9 100%)",
         }}
       >
-        <div className="bg-white rounded-3xl p-4 shadow-md flex items-center gap-4">
-          <div className="w-16 h-16 rounded-full overflow-hidden cursor-pointer">
-            <Link href="/pages/select-avatar">
-              <Image
-                src={currentAvatar}
-                width={64}
-                height={64}
-                alt="Avatar"
-                className="object-cover w-full h-full"
-                onError={() => setCurrentAvatar("/images/Av01.jpg")}
-              />
-            </Link>
-          </div>
-          <div className="flex-1">
-            <div className="text-sm text-gray-500">
+        <div className="bg-white rounded-3xl p-4 shadow-md flex items-center justify-between">
+          {/* Avatar + Username */}
+          <div className="flex items-center gap-3">
+            {/* Avatar with gradient ring */}
+            <div
+              className="w-16 h-16 rounded-full p-1"
+              style={{
+                background:
+                  "conic-gradient(from 180deg at 50% 50%, #5C8DFF, #FF6FD8)",
+              }}
+            >
+              <div className="w-full h-full rounded-full overflow-hidden bg-white">
+                <Link href="/pages/select-avatar">
+                  <Image
+                    src={currentAvatar}
+                    width={64}
+                    height={64}
+                    alt="Avatar"
+                    className="object-cover w-full h-full"
+                    onError={() => setCurrentAvatar("/images/Av01.jpg")}
+                  />
+                </Link>
+              </div>
+            </div>
+
+            {/* Username pill */}
+            <div className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-semibold px-4 py-1 rounded-full text-sm shadow">
               @{userData?.username || "Username"}
             </div>
-            <div className="text-lg font-bold text-gray-800">
-              {userData?.first_name}
-            </div>
           </div>
-          <div className="text-right">
-            <div className="text-sm text-orange-400 font-semibold">
-              💎 {1500}
+
+          {/* Currency info */}
+          <div className="flex items-center gap-4">
+            <div className="text-right">
+              <div className="flex items-center gap-1 text-black font-bold text-lg">
+                <span className="text-orange-500">🪙</span>
+                1.500
+              </div>
+              <div className="text-sm text-gray-400">Currency</div>
             </div>
-            <div className="text-xs text-blue-500 underline">How to earn?</div>
+
+            {/* How to earn button */}
+            <div className="bg-white border border-blue-100 shadow px-3 py-1 rounded-full text-blue-600 text-sm font-semibold cursor-pointer hover:shadow-md transition">
+              How to earn?
+            </div>
           </div>
         </div>
 
@@ -96,7 +115,9 @@ export default function Home() {
       </div>
 
       {/* Recommended Apps */}
-      <h2 className="text-center text-xl font-bold mt-8 mb-4">Recommended Apps</h2>
+      <h2 className="text-center text-xl font-bold mt-8 mb-4">
+        Recommended Apps
+      </h2>
       <div className="flex gap-2 mb-4 overflow-x-auto">
         {["Newest", "Top", "Favourite"].map((cat) => (
           <button
