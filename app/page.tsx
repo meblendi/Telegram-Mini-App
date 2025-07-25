@@ -134,7 +134,7 @@ export default function Home() {
         <div className="bg-white rounded-xl p-4 shadow-md flex gap-4 items-center">
           <div className="w-14 h-14 rounded-full overflow-hidden">
             <Image
-              src="/images/app01.jpg"
+              src="/images/app02.jpg"
               alt="App Icon"
               width={56}
               height={56}
