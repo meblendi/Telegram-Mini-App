@@ -4,7 +4,7 @@ export default function Settings() {
   return (
     <main>
       
-      <div className="text-center mt-10">You need Unlock this app first</div>
+      <div className="text-center mt-10">You need to Unlock this App first</div>
       {/* Bottom Navigation */}
       <div className="fixed bottom-0 left-0 right-0 bg-white shadow-md flex justify-around py-3 rounded-t-3xl">
         {[
