@@ -12,6 +12,7 @@ interface UserData {
   username?: string;
   language_code: string;
   is_premium?: boolean;
+  avatar?: string;  
 }
 
 export default function Home() {
@@ -22,17 +23,17 @@ export default function Home() {
     const init = async () => {
       try {
         const { default: WebApp } = await import("@twa-dev/sdk");
-
+        
         if (WebApp.initDataUnsafe.user) {
           const user = WebApp.initDataUnsafe.user as UserData;
           setUserData(user);
 
           // First create/update the user
           await createOrUpdateUser({ user });
-
+          
           // Then fetch the user data including avatar
           const response = await getUser(user.id);
-          if (response.avatar) {
+          if (response?.avatar) {
             setCurrentAvatar(`/images/${response.avatar}`);
           }
         }

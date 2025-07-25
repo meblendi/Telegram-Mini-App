@@ -1,17 +1,21 @@
 import wretch from "wretch";
 import { url } from "./server"; 
 
-interface UserData {
-  id: number;
-  first_name: string;
-  last_name?: string;
-  username?: string;
-  language_code: string;
-  is_premium?: boolean;
+export interface TelegramUserResponse {
+    telegram_id: number;
+    first_name: string;
+    last_name?: string;
+    username?: string;
+    language_code: string;
+    is_premium?: boolean;
+    avatar: string;
+    points?: number;
+    streak?: number;
+    time_spent?: number;
 }
 
 interface CreateUserRequest {
-  user: UserData;
+  user: TelegramUserResponse;
 }
 
 // Remove unused UpdateAvatarRequest since we're using inline typing below
@@ -23,7 +27,7 @@ export const createOrUpdateUser = (data: CreateUserRequest) => {
     .url("/telusers/")
     .json(data)
     .post()
-    .json<{ status: string; user?: UserData; error?: string }>()
+    .json<TelegramUserResponse>()
     .catch(error => {
       console.error("API Error:", error);
       throw error;
@@ -38,12 +42,11 @@ export const updateUserAvatar = (telegram_id: number, avatar: string) => {
     .json<{ status: string; error?: string }>();
 };
 
-// Add to fetcher.ts
 export const getUser = (telegram_id: number) => {
   return api
     .url(`/telusers/${telegram_id}/`)
     .get()
-    .json<{ status: string; error?: string }>();
+    .json<TelegramUserResponse>();  // Use the new interface
 };
 
 export const fetcher = <T>(endpoint: string): Promise<T> => {
