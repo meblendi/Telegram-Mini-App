@@ -1,15 +1,24 @@
-import BottomNavBar from "../components/BottomNavBar"; 
+import Link from "next/link";
+
 
 export default function Settings() {
   return (
-    <main className="min-h-screen bg-gray-100">
-      <div className="text-center mt-10">
-        Settings Page <br />
-        COMING SOON
+    <main>
+      
+      <div className="text-center mt-10">Settings Page <br></br>COMING SOON</div>
+      {/* Bottom Navigation */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white shadow-md flex justify-around py-3 rounded-t-3xl">
+        {[
+          { label: "Home", icon: "🏠", href: "/" },
+          { label: "Upgrade", icon: "🌟", href: "/store" },
+          { label: "Settings", icon: "⚙️", href: "/settings" },
+        ].map(({ label, icon, href }) => (
+          <Link href={href} key={label} className="text-center text-sm">
+            <div className="text-xl">{icon}</div>
+            <div>{label}</div>
+          </Link>
+        ))}
       </div>
-
-      {/* ✅ Actually using BottomNavBar */}
-      <BottomNavBar />
     </main>
   );
 }
