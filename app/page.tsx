@@ -18,21 +18,24 @@ export default function Home() {
   const [userData, setUserData] = useState<UserData | null>(null);
 
   useEffect(() => {
-    import("@twa-dev/sdk")
-      .then(({ default: WebApp }) => {
+    const syncUser = async () => {
+      try {
+        const { default: WebApp } = await import("@twa-dev/sdk");
+
         if (WebApp.initDataUnsafe.user) {
           const user = WebApp.initDataUnsafe.user as UserData;
           setUserData(user);
 
-          createOrUpdateUser({ user })
-            .then((response) => console.log("User synced:", response))
-            .catch((error: Error) => console.error("Sync failed:", error));
-          // ... rest of the code
+          const response = await createOrUpdateUser({ user });
+          console.log("API Response:", response);
         }
-      })
-      .catch((error: Error) => {
-        console.error("Failed to initialize Telegram SDK:", error);
-      });
+      } catch (error) {
+        console.error("Full error:", error);
+        // Optionally show error to user
+      }
+    };
+
+    syncUser();
   }, []);
 
   return (
