@@ -37,7 +37,7 @@ export default function Home() {
       } catch (error) {
         console.error("Initialization error:", error);
         // Fallback to default avatar if API fails
-        setCurrentAvatar("/images/Av01.jpg");
+        
       }
     };
 
@@ -61,7 +61,8 @@ export default function Home() {
                 width={64}
                 height={64}
                 alt="Avatar"
-                className="object-cover w-full h-full"                
+                className="object-cover w-full h-full"
+                onError={() => setCurrentAvatar("/images/Av01.jpg")}
               />
             </Link>
           </div>
