@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { createOrUpdateUser } from "./fetcher";
 
 interface UserData {
   id: number;
@@ -20,17 +19,34 @@ export default function Home() {
   useEffect(() => {
     import("@twa-dev/sdk")
       .then(({ default: WebApp }) => {
-        if (WebApp.initDataUnsafe.user) {
-          const user = WebApp.initDataUnsafe.user as UserData;
+        const user = WebApp.initDataUnsafe.user;
+
+        if (user) {
           setUserData(user);
 
-          createOrUpdateUser({ user })
-            .then((response) => console.log("User synced:", response))
-            .catch((error: Error) => console.error("Sync failed:", error));
-          // ... rest of the code
+          // Send data to backend
+          fetch("https://newbi-django-render-app.onrender.com/api/telusers/", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ user }),
+          })
+            .then((res) => res.json())
+            .then((data) => console.log("User synced:", data))
+            .catch((err) => console.error("Sync error:", err));
         }
+
+        document.body.style.setProperty(
+          "--tg-viewport-height",
+          `${window.innerHeight}px`
+        );
+        document.body.style.setProperty(
+          "--tg-viewport-stable-height",
+          `${window.innerHeight}px`
+        );
       })
-      .catch((error: Error) => {
+      .catch((error) => {
         console.error("Failed to initialize Telegram SDK:", error);
       });
   }, []);
@@ -76,7 +92,7 @@ export default function Home() {
         <h2 className="text-xl font-bold mt-6 mb-2">Statistics</h2>
         <div className="grid grid-cols-2 gap-4">
           <div className="bg-purple-100 p-4 rounded-xl text-center shadow-md">
-            <div className="text-3xl font-bold text-purple-700">2.600</div>
+            <div className="text-3xl font-bold text-purple-700">1.500</div>
             <div className="text-sm text-purple-900 font-semibold">Streak</div>
           </div>
           <div className="bg-green-100 p-4 rounded-xl text-center shadow-md">

@@ -2,37 +2,36 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { updateUserAvatar } from "../../fetcher";
 
 const avatarList = Array.from({ length: 9 }, (_, i) => `Av0${i + 1}.jpg`);
-
-declare global {
-  interface Window {
-    Telegram?: {
-      WebApp?: {
-        initDataUnsafe?: {
-          user?: {
-            id: number;
-          };
-        };
-      };
-    };
-  }
-}
 
 export default function SelectAvatarPage() {
   const router = useRouter();
 
   const handleSelect = async (avatar: string) => {
     try {
-      const telegram_id = window.Telegram?.WebApp?.initDataUnsafe?.user?.id;
+      const userId = (window as any)?.Telegram?.WebApp?.initDataUnsafe?.user
+        ?.id;
 
-      if (telegram_id) {
-        await updateUserAvatar(telegram_id, avatar);
-      }
+      if (!userId) return;
+
+      const res = await fetch(
+        "https://newbi-django-render-app.onrender.com/api/telusers/avatar/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ telegram_id: userId, avatar }),
+        }
+      );
+
+      const result = await res.json();
+      console.log("Avatar updated:", result);
+
       router.push("/");
-    } catch (error) {
-      console.error("Failed to update avatar:", error);
+    } catch (err) {
+      console.error("Failed to update avatar:", err);
     }
   };
 
