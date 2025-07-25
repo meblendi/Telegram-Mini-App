@@ -129,7 +129,30 @@ export default function Home() {
             Let&apos;s Go
           </button>
         </Link>
+
+        <div className="w-14 h-14 rounded-full overflow-hidden">
+          <Image
+            src="/images/app01.jpg"
+            alt="App Icon"
+            width={56}
+            height={56}
+            className="object-cover w-full h-full"
+          />
+        </div>
+
+        <div className="flex-1">
+          <div className="text-md font-bold">Personal accountant</div>
+          <div className="text-xs text-gray-500">🔥🔥🔥 • 73% • 56.3K</div>
+        </div>
+        <Link href="/pages/Personal accountant">
+          <button className="bg-blue-500 text-white text-sm px-3 py-1 rounded-xl">
+            Unlock
+          </button>
+        </Link>
+
+        
       </div>
+      
 
       {/* Bottom Navigation */}
       <div className="fixed bottom-0 left-0 right-0 bg-white shadow-md flex justify-around py-3 rounded-t-3xl">
