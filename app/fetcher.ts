@@ -38,6 +38,14 @@ export const updateUserAvatar = (telegram_id: number, avatar: string) => {
     .json<{ status: string; error?: string }>();
 };
 
+// Add to fetcher.ts
+export const getUser = (telegram_id: number) => {
+  return api
+    .url(`/telusers/${telegram_id}/`)
+    .get()
+    .json<{ status: string; error?: string }>();
+};
+
 export const fetcher = <T>(endpoint: string): Promise<T> => {
   return api.get(endpoint).json<T>();
 };

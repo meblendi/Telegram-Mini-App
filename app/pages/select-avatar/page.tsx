@@ -26,9 +26,13 @@ export default function SelectAvatarPage() {
   const handleSelect = async (avatar: string) => {
     try {
       const telegram_id = window.Telegram?.WebApp?.initDataUnsafe?.user?.id;
-
       if (telegram_id) {
         await updateUserAvatar(telegram_id, avatar);
+
+        // Update the avatar in localStorage or state management
+        if (window && window.localStorage) {
+          localStorage.setItem("currentAvatar", `/images/${avatar}`);
+        }
       }
       router.push("/");
     } catch (error) {

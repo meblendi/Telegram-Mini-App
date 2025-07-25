@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { createOrUpdateUser } from "./fetcher";
+import { createOrUpdateUser, getUser } from "./fetcher";
 
 interface UserData {
   id: number;
@@ -16,9 +16,10 @@ interface UserData {
 
 export default function Home() {
   const [userData, setUserData] = useState<UserData | null>(null);
+  const [currentAvatar, setCurrentAvatar] = useState("/images/Av01.jpg");
 
   useEffect(() => {
-    const syncUser = async () => {
+    const init = async () => {
       try {
         const { default: WebApp } = await import("@twa-dev/sdk");
 
@@ -26,16 +27,21 @@ export default function Home() {
           const user = WebApp.initDataUnsafe.user as UserData;
           setUserData(user);
 
-          const response = await createOrUpdateUser({ user });
-          console.log("API Response:", response);
+          // First create/update the user
+          await createOrUpdateUser({ user });
+
+          // Then fetch the user data including avatar
+          const response = await getUser(user.id);
+          if (response.avatar) {
+            setCurrentAvatar(`/images/${response.avatar}`);
+          }
         }
       } catch (error) {
-        console.error("Full error:", error);
-        // Optionally show error to user
+        console.error("Initialization error:", error);
       }
     };
 
-    syncUser();
+    init();
   }, []);
 
   return (
@@ -51,11 +57,12 @@ export default function Home() {
           <div className="w-16 h-16 rounded-full overflow-hidden cursor-pointer">
             <Link href="/pages/select-avatar">
               <Image
-                src="/images/Av01.jpg"
+                src={currentAvatar}
                 width={64}
                 height={64}
                 alt="Avatar"
                 className="object-cover w-full h-full"
+                onError={() => setCurrentAvatar("/images/Av01.jpg")}
               />
             </Link>
           </div>
