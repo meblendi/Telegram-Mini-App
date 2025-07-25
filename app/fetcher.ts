@@ -20,7 +20,7 @@ export const api = wretch(url).url("/api");
 
 export const createOrUpdateUser = (data: CreateUserRequest) => {
   return api
-    .url("telusers/")
+    .url("/telusers/")
     .json(data)
     .post()
     .json<{ status: string; user?: UserData; error?: string }>()
