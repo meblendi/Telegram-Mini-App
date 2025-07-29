@@ -34,14 +34,40 @@ export default function SelectAvatarPage() {
           localStorage.setItem("currentAvatar", `/images/${avatar}`);
         }
       }
-      router.push("/");
+      router.push("/pages/profile");
     } catch (error) {
       console.error("Failed to update avatar:", error);
     }
   };
 
+  const handleClose = () => {
+    router.push("/pages/profile");
+  };
+
   return (
-    <main className="min-h-screen bg-white p-6">
+    <main className="min-h-screen bg-white p-6 relative">
+      {/* Close button positioned at top-right */}
+      <button
+        onClick={handleClose}
+        className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 transition-colors"
+        aria-label="Close avatar selection"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6 text-gray-500"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
+      
       <h1 className="text-2xl font-bold mb-6 text-center">
         Select Your Avatar
       </h1>

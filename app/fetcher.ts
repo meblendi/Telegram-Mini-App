@@ -17,6 +17,7 @@ interface TelegramUserResponse extends TelegramUserCore {
   avatar: string;
   points?: number;
   streak?: number;
+  highest_streak?: number;
   time_spent?: number;
 }
 

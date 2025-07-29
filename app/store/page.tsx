@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Store() {
   return (
-    <main>
+    <main className="bg-gradient-to-b from-white to-blue-50 min-h-screen px-4 pb-24 pt-6 font-sans">
       
       <div className="text-center mt-10">Store Page <br></br>COMING SOON</div>
       {/* Bottom Navigation */}

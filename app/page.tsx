@@ -12,6 +12,9 @@ interface TelegramUserCore {
   username?: string;
   language_code: string;
   is_premium?: boolean;
+  points?: number;
+  streak?: number;
+  time_spent?: number;
 }
 
 export default function Home() {
@@ -25,23 +28,34 @@ export default function Home() {
 
         if (WebApp.initDataUnsafe.user) {
           const user = WebApp.initDataUnsafe.user as TelegramUserCore;
-          setUserData(user);
 
-          // Create/update user - response not used here
-          await createOrUpdateUser({ user });
-
-          // Get complete user data including avatar
           const fullUser = await getUser(user.id);
+          const updatedUser = await createOrUpdateUser({ user });
+
+          setUserData({
+            ...user,
+            points: updatedUser.points ?? fullUser.points ?? 0,
+            streak: updatedUser.streak ?? fullUser.streak ?? 0,
+            time_spent: updatedUser.time_spent ?? fullUser.time_spent ?? 0,
+          });
+
           setCurrentAvatar(`/images/${fullUser.avatar}`);
         }
       } catch (error) {
         console.error("Initialization error:", error);
-        // Fallback to default avatar if API fails
+        // Set default points if API fails
+        setUserData((prev) => (prev ? { ...prev, points: 0 } : null));
       }
     };
 
     init();
   }, []);
+
+  const formatMinutes = (totalMinutes: number) => {
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
+    return `${hours}h ${minutes}m`;
+  };
 
   return (
     <main className="bg-gradient-to-b from-white to-blue-50 min-h-screen px-4 pb-24 pt-6 font-sans">
@@ -52,64 +66,77 @@ export default function Home() {
           background: "linear-gradient(45deg, #EEE8F2 0%, #DDEFF9 100%)",
         }}
       >
-        <div className="bg-white rounded-3xl p-4 shadow-md flex items-center justify-between">
-          {/* Avatar + Username */}
-          <div className="flex items-center gap-3">
-            {/* Avatar with gradient ring */}
-            <div
-              className="w-16 h-16 rounded-full p-1"
-              style={{
-                background:
-                  "conic-gradient(from 180deg at 50% 50%, #5C8DFF, #FF6FD8)",
-              }}
-            >
-              <div className="w-full h-full rounded-full overflow-hidden bg-white">
-                <Link href="/pages/select-avatar">
-                  <Image
-                    src={currentAvatar}
-                    width={64}
-                    height={64}
-                    alt="Avatar"
-                    className="object-cover w-full h-full"
-                    onError={() => setCurrentAvatar("/images/Av01.jpg")}
-                  />
-                </Link>
-              </div>
-            </div>
-
-            {/* Username pill */}
-            <div className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-semibold px-4 py-1 rounded-full text-sm shadow">
-              @{userData?.username || "Username"}
-            </div>
+        {/* Custom Header */}
+        <div className="mainInfo">
+          <div className="circle"></div>
+          <div className="circle2">
+            <Link href="/pages/profile">
+              <Image
+                src={currentAvatar}
+                alt="Avatar"
+                width={100}
+                height={100}
+                className="circle-img"
+              />
+            </Link>
           </div>
+          <p className="maintext">
+            {userData?.first_name} {userData?.last_name ?? ""} <br />
+            🪙 {userData?.points ?? 0}
+          </p>
+          <div className="bot1">
+            <p>Earn More</p>
+          </div>
+        </div>
 
-          {/* Currency info */}
-          <div className="flex items-center gap-4">
-            <div className="text-right">
-              <div className="flex items-center gap-1 text-black font-bold text-lg">
-                <span className="text-orange-500">🪙</span>
-                1.500
-              </div>
-              <div className="text-sm text-gray-400">Currency</div>
-            </div>
-
-            {/* How to earn button */}
-            <div className="bg-white border border-blue-100 shadow px-3 py-1 rounded-full text-blue-600 text-sm font-semibold cursor-pointer hover:shadow-md transition">
-              How to earn?
-            </div>
+        <div className="secondaryInfo">
+          <div className="second-text">
+            <p>@{userData?.username || "Username"}</p>
           </div>
         </div>
 
         {/* Statistics */}
         <h2 className="text-center text-xl font-bold mt-6 mb-2">Statistics</h2>
-        <div className="grid grid-cols-2 gap-4">
-          <div className="bg-purple-100 p-4 rounded-xl text-center shadow-md">
-            <div className="text-3xl font-bold text-purple-700">2.600</div>
-            <div className="text-sm text-purple-900 font-semibold">Streak</div>
+        <div className="grid grid-cols-2 gap-4 mt-7">
+          <div className="bg-white p-1 rounded-xl text-center shadow-md overflow-visible">
+            <div className="bg-[url('/images/back02.jpg')] bg-cover bg-center rounded-xl text-sm text-blue-700 font-semibold pb-1 mb-1 overflow-visible relative">
+              <div className="flex justify-center absolute -top-12 left-1/2 transform -translate-x-1/2 w-full">
+                <Image
+                  src="/images/3d01.png"
+                  alt="Streak"
+                  width={100}
+                  height={100}
+                  className=""
+                />
+              </div>
+              <br />
+              <br />
+              <br />
+              Day
+            </div>
+            <div className="text-3xl font-bold text-blue-700">
+              {userData?.streak ?? 0}
+            </div>
           </div>
-          <div className="bg-green-100 p-4 rounded-xl text-center shadow-md">
-            <div className="text-3xl font-bold text-green-700">1h 23m</div>
-            <div className="text-sm text-green-900 font-semibold">Time</div>
+          <div className="bg-white p-1 rounded-xl text-center shadow-md overflow-visible">
+            <div className="bg-[url('/images/back03.jpg')] bg-cover bg-center rounded-xl text-sm text-green-700 font-semibold pb-1 mb-1 overflow-visible relative">
+              <div className="flex justify-center absolute -top-12 left-1/2 transform -translate-x-1/2 w-full">
+                <Image
+                  src="/images/3d02.png"
+                  alt="Time"
+                  width={100}
+                  height={100}
+                  className=""
+                />
+              </div>
+              <br />
+              <br />
+              <br />
+              Time
+            </div>
+            <div className="text-3xl font-bold text-green-700">
+              {formatMinutes(userData?.time_spent ?? 0)}
+            </div>
           </div>
         </div>
       </div>
@@ -133,7 +160,7 @@ export default function Home() {
         <div className="bg-white rounded-xl p-4 shadow-md flex gap-4 items-center">
           <div className="w-14 h-14 rounded-full overflow-hidden">
             <Image
-              src="/images/app01.jpg"
+              src="/images/app01.png"
               alt="App Icon"
               width={56}
               height={56}
@@ -142,7 +169,7 @@ export default function Home() {
           </div>
 
           <div className="flex-1">
-            <div className="text-md font-bold">Personal assistant</div>
+            <div className="text-md font-bold">Manager</div>
             <div className="text-xs text-gray-500">🔥🔥🔥 • 87% • 315.6K</div>
           </div>
           <Link href="/pages/personal_assistant">
@@ -155,7 +182,7 @@ export default function Home() {
         <div className="bg-white rounded-xl p-4 shadow-md flex gap-4 items-center">
           <div className="w-14 h-14 rounded-full overflow-hidden">
             <Image
-              src="/images/app02.jpg"
+              src="/images/app02.png"
               alt="App Icon"
               width={56}
               height={56}
@@ -164,7 +191,7 @@ export default function Home() {
           </div>
 
           <div className="flex-1">
-            <div className="text-md font-bold">Personal accountant</div>
+            <div className="text-md font-bold">Finance</div>
             <div className="text-xs text-gray-500">👌👌👌 • 73% • 56.3K</div>
           </div>
           <Link href="/pages/Personal accountant">
