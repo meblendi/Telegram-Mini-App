@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { createOrUpdateUser, getUser } from "./fetcher";
+import { createOrUpdateUser, updateTimeSpent, getUser } from "./fetcher";
 
 interface TelegramUserCore {
   id: number;
@@ -51,11 +51,26 @@ export default function Home() {
     init();
   }, []);
 
-  const formatMinutes = (totalMinutes: number) => {
-    const hours = Math.floor(totalMinutes / 60);
-    const minutes = totalMinutes % 60;
+  useEffect(() => {
+    if (!userData) return;
+
+    let seconds = 0;
+    const interval = setInterval(() => {
+      seconds += 1;
+      // Update every minute to reduce API calls
+      if (seconds % 60 === 0) {
+        updateTimeSpent(userData.id, 60).catch(console.error);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [userData]);
+
+  function formatTime(seconds: number): string {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
     return `${hours}h ${minutes}m`;
-  };
+  }
 
   return (
     <main className="bg-gradient-to-b from-white to-blue-50 min-h-screen px-4 pb-24 pt-6 font-sans">
@@ -135,7 +150,7 @@ export default function Home() {
               Time
             </div>
             <div className="text-3xl font-bold text-green-700">
-              {formatMinutes(userData?.time_spent ?? 0)}
+              {formatTime(userData?.time_spent ?? 0)}
             </div>
           </div>
         </div>

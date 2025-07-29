@@ -53,6 +53,14 @@ export const updateUserAvatar = (telegram_id: number, avatar: string) => {
     .json<{ status: string; error?: string }>();
 };
 
+export const updateTimeSpent = (telegram_id: number, seconds: number) => {
+  return api
+    .url("/telusers/update_time/")
+    .json({ telegram_id, seconds })
+    .post()
+    .json<{ daily_time_spent: number; total_time_spent: number }>();
+};
+
 export const getUser = (telegram_id: number) => {
   return api
     .url(`/telusers/${telegram_id}/`)
