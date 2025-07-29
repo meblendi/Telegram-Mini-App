@@ -58,7 +58,7 @@ export const updateTimeSpent = (telegram_id: number, seconds: number) => {
     .url("/telusers/update_time/")
     .json({ telegram_id, seconds })
     .post()
-    .json<{ daily_time_spent: number; total_time_spent: number }>();
+    .json<{ today_time_spent: number; time_spent: number }>();
 };
 
 export const getUser = (telegram_id: number) => {
