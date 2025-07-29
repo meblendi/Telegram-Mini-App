@@ -19,6 +19,7 @@ interface TelegramUserResponse extends TelegramUserCore {
   streak?: number;
   highest_streak?: number;
   time_spent?: number;
+  today_time_spent?: number;
 }
 
 // Request payload for creating/updating users

@@ -36,7 +36,7 @@ export default function Home() {
             ...user,
             points: updatedUser.points ?? fullUser.points ?? 0,
             streak: updatedUser.streak ?? fullUser.streak ?? 0,
-            today_time_spent: updatedUser.time_spent ?? fullUser.time_spent ?? 0,
+            today_time_spent: updatedUser.today_time_spent ?? fullUser.today_time_spent ?? 0,
           });
 
           setCurrentAvatar(`/images/${fullUser.avatar}`);
