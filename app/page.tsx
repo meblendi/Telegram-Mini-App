@@ -14,7 +14,7 @@ interface TelegramUserCore {
   is_premium?: boolean;
   points?: number;
   streak?: number;
-  time_spent?: number;
+  today_time_spent?: number;
 }
 
 export default function Home() {
@@ -36,7 +36,7 @@ export default function Home() {
             ...user,
             points: updatedUser.points ?? fullUser.points ?? 0,
             streak: updatedUser.streak ?? fullUser.streak ?? 0,
-            time_spent: updatedUser.time_spent ?? fullUser.time_spent ?? 0,
+            today_time_spent: updatedUser.time_spent ?? fullUser.time_spent ?? 0,
           });
 
           setCurrentAvatar(`/images/${fullUser.avatar}`);
@@ -150,7 +150,7 @@ export default function Home() {
               Time
             </div>
             <div className="text-3xl font-bold text-green-700">
-              {formatTime(userData?.time_spent ?? 0)}
+              {formatTime(userData?.today_time_spent ?? 0)}
             </div>
           </div>
         </div>
