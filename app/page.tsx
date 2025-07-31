@@ -84,11 +84,9 @@ export default function Home() {
             {userData?.first_name} {userData?.last_name ?? ""} <br />
             🪙 {userData?.points ?? 0}
           </p>
-          <Link href="/pages/referral">
-            <div className="bot1">
-              <p>Earn More</p>
-            </div>
-          </Link>
+          <a href="/pages/referral" className="bot1">
+            <p>Earn More</p>
+          </a>
         </div>
 
         <div className="secondaryInfo">
