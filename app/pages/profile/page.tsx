@@ -15,6 +15,8 @@ interface TelegramUserCore {
 interface FullUser extends TelegramUserCore {
   avatar: string;
   points?: number;
+  highest_streak?: number;
+  time_spent?: number;
 }
 
 export default function ProfilePage() {
@@ -34,6 +36,12 @@ export default function ProfilePage() {
     init();
   }, []);
 
+  function formatTime(seconds: number): string {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    return `${hours}h ${minutes}m`;
+  }
+
   return (
     <main className="min-h-screen bg-white font-sans">
       {/* Header */}
@@ -46,7 +54,7 @@ export default function ProfilePage() {
               alt="User Avatar"
               width={100}
               height={100}
-              className="rounded-full mx-auto border-4 border-white"
+              className="rounded-full mx-auto border-4 border-blue-400"
             />
           </Link>
           <h1 className="text-xl font-bold mt-2">
@@ -58,8 +66,8 @@ export default function ProfilePage() {
         </div>
       </div>
       <div className="flex justify-center">
-        <div className="mt-4 bg-white px-4 py-2 rounded-full inline-flex items-center gap-2 shadow-md">
-          <div className="bg-blue-600 text-white text-sm px-3 py-1 rounded-full font-semibold">
+        <div className="mt-2 border-2 border-gray-400 bg-white px-2 py-2 rounded-full inline-flex items-center gap-2 shadow-md">
+          <div className="bg-blue-600 text-white text-sm px-2 py-1 rounded-full font-semibold">
             🪙 {userData?.points ?? 0}
           </div>
           <div className="text-sm font-medium text-blue-500">
@@ -69,9 +77,9 @@ export default function ProfilePage() {
       </div>
       {/* Stats */}
       <div className="grid grid-cols-2 gap-4 mt-6 px-6">
-        <StatCard label="Level" value="14" icon="🏆" color="green" />
-        <StatCard label="Time" value="1h 23m" icon="⏱️" color="blue" />
-        <StatCard label="Skills" value="1.500" icon="🗡️" color="pink" />
+        <StatCard label="Highest Streak" value={userData?.highest_streak ?? 0} icon="🔥" color="green" />
+        <StatCard label="Time" value={formatTime(userData?.time_spent ?? 0)} icon="⏱️" color="blue" />
+        <StatCard label="Skills" value="1.500" icon="🏆" color="pink" />
         <StatCard label="Apps" value="28" icon="📱" color="yellow" />
       </div>
 
@@ -116,7 +124,7 @@ function StatCard({
   color,
 }: {
   label: string;
-  value: string;
+  value: string | number;
   icon: string;
   color: "green" | "blue" | "pink" | "yellow";
 }) {
