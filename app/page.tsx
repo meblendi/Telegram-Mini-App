@@ -29,21 +29,20 @@ export default function Home() {
         if (WebApp.initDataUnsafe.user) {
           const user = WebApp.initDataUnsafe.user as TelegramUserCore;
 
-          const fullUser = await getUser(user.id);
+          // Only make one request - createOrUpdateUser will handle both cases
           const updatedUser = await createOrUpdateUser({ user });
 
           setUserData({
             ...user,
-            points: updatedUser.points ?? fullUser.points ?? 0,
-            streak: updatedUser.streak ?? fullUser.streak ?? 0,
-            time_spent: updatedUser.time_spent ?? fullUser.time_spent ?? 0,
+            points: updatedUser.points ?? 0,
+            streak: updatedUser.streak ?? 0,
+            time_spent: updatedUser.time_spent ?? 0,
           });
 
-          setCurrentAvatar(`/images/${fullUser.avatar}`);
+          setCurrentAvatar(`/images/${updatedUser.avatar}`);
         }
       } catch (error) {
         console.error("Initialization error:", error);
-        // Set default points if API fails
         setUserData((prev) => (prev ? { ...prev, points: 0 } : null));
       }
     };
