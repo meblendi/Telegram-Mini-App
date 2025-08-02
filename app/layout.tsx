@@ -31,8 +31,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <TimeTrackingProvider>
           {children}
-          <Analytics />
-          <SpeedInsights />
+          <Analytics />         
         </TimeTrackingProvider>
       </body>
     </html>
