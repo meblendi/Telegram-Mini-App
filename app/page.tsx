@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { createOrUpdateUser, getUser } from "./fetcher";
+import { createOrUpdateUser } from "./fetcher";
 
 interface TelegramUserCore {
   id: number;
@@ -28,8 +28,6 @@ export default function Home() {
 
         if (WebApp.initDataUnsafe.user) {
           const user = WebApp.initDataUnsafe.user as TelegramUserCore;
-
-          // Only make one request - createOrUpdateUser will handle both cases
           const updatedUser = await createOrUpdateUser({ user });
 
           setUserData({
